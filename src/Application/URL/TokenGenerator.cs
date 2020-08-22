@@ -11,6 +11,11 @@ namespace MiniURL.Application.URL
     {
         public static string GetUniqueKey(int length)
         {
+            if (length <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(GetUniqueKey));
+            }
+
             // The chars array "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.-" has length 64 and
             // therefore divides the size of a byte evenly (256 % 64 = 0).
             // If another array is used that does not divide 64 this has to be taken care of.
