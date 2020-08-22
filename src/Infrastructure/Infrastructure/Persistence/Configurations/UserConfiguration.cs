@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Infrastructure.Persistence.Configurations
+namespace MiniURL.Infrastructure.Persistence.Configurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

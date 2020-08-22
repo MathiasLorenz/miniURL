@@ -7,5 +7,9 @@
     <AssemblyName>MiniURL.API</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
 
 </Project>

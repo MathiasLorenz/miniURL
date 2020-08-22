@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MiniURL.Application.Common.Interfaces;
 using MiniURL.Domain.Entities;
 using System.Reflection;
 
-namespace Infrastructure.Persistence
+namespace MiniURL.Infrastructure.Persistence
 {
-    public class MiniURLDbContext : DbContext
+    public class MiniURLDbContext : DbContext, IMiniURLDbContext
     {
         public MiniURLDbContext(DbContextOptions<MiniURLDbContext> options)
             : base(options)
