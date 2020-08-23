@@ -12,6 +12,6 @@ namespace MiniURL.Domain.Entities
         public string ShortURL { get; set; } = null!;
         public bool Deleted { get; set; } = false;
 
-        public User? User { get; set; } = new User();
+        public User? User { get; set; } = null;
     }
 }
