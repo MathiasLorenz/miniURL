@@ -17,7 +17,8 @@ namespace MiniURL.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.ShortURL)
                 .IsRequired()
-                .HasMaxLength(8); // I should probably configure this length somewhere...
+                .HasMaxLength(8) // I should probably configure this length somewhere...
+                .IsFixedLength(true);
 
             builder.Property(x => x.Deleted)
                 .IsRequired();
