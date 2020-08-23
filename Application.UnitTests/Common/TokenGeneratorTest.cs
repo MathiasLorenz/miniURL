@@ -4,7 +4,7 @@ using Shouldly;
 using System;
 using System.Collections.Generic;
 
-namespace MiniURL.Application.Tests.URL
+namespace MiniURL.Application.Tests.Common
 {
     [TestClass]
     public class TokenGeneratorTest
