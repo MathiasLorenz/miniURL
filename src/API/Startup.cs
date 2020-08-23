@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MiniURL.Application;
 using MiniURL.Infrastructure;
 
 namespace MiniURL.API
@@ -20,6 +21,7 @@ namespace MiniURL.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
+            services.AddApplication();
 
             services.AddControllers();
         }
