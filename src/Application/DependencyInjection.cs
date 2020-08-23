@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MiniURL.Application.URL;
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
+using MiniURL.Application.Common;
+using MiniURL.Application.Common.Interfaces;
 
 namespace MiniURL.Application
 {

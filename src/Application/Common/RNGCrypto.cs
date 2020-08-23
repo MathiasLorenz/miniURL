@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using MiniURL.Application.Common.Interfaces;
 
-namespace MiniURL.Application.URL
+namespace MiniURL.Application.Common
 {
     public class RNGCrypto : IRNGCrypto
     {

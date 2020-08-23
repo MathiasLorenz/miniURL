@@ -1,11 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MiniURL.Application.URL;
+using MiniURL.Application.Common;
 using Shouldly;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace MiniURL.Application.Tests.URL
 {

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using MiniURL.Application.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MiniURL.Application.URL
+namespace MiniURL.Application.Common
 {
     // Taken from https://gist.github.com/diegojancic/9f78750f05550fa6039d2f6092e461e5 from discussion on
     // https://stackoverflow.com/questions/1344221/how-can-i-generate-random-alphanumeric-strings
-    public class TokenGenerator
+    public class TokenGenerator : ITokenGenerator
     {
         private readonly IRNGCrypto _crypto;
 
@@ -33,7 +34,7 @@ namespace MiniURL.Application.URL
 
             var builder = new StringBuilder(length);
 
-            foreach(var b in data)
+            foreach (var b in data)
             {
                 builder.Append(chars[b % (charsLength)]);
             }
