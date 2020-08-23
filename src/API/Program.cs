@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MiniURL.Application.Common.Interfaces;
+using MiniURL.Infrastructure.Persistence;
 
 namespace MiniURL.API
 {
@@ -13,7 +16,29 @@ namespace MiniURL.API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            SeedDb(host);
+            
+            host.Run();
+        }
+
+        private async static void SeedDb(IHost host)
+        {
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            var ctx = services.GetRequiredService<IMiniURLDbContext>();
+
+            var seeder = new MiniURLDbContextSeeder(ctx);
+
+            try
+            {
+                await seeder.SeedAllAsync(new System.Threading.CancellationToken());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
