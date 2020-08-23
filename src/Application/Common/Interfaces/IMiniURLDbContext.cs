@@ -12,6 +12,7 @@ namespace MiniURL.Application.Common.Interfaces
     public interface IMiniURLDbContext
     {
         public DbSet<User> Users { get; }
+        public DbSet<PersistedURL> PersistedURLs { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

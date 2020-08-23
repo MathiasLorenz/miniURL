@@ -13,6 +13,7 @@ namespace MiniURL.Infrastructure.Persistence
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<PersistedURL> PersistedURLs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -21,7 +21,7 @@ namespace MiniURL.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
 
-            // Todo: Use FluentValidations to validate this on creation.
+            // Todo: Use FluentValidations to validate the email on creation.
             builder.Property(x => x.Email)
                 .IsRequired()
                 .HasMaxLength(100);
