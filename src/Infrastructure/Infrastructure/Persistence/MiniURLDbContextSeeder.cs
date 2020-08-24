@@ -52,6 +52,20 @@ namespace MiniURL.Infrastructure.Persistence
                     URL = "https://www.google.com/search?q=ef+core+renames+table&oq=ef+core+renames+table&aqs=chrome..69i57j0l7.10922j0j7&sourceid=chrome&ie=UTF-8",
                     ShortURL = "objurhgi",
                     Deleted = true
+                },
+                new PersistedURL
+                {
+                    URL = "https://github.com/MathiasLorenz",
+                    ShortURL = "iodfetry",
+                    Deleted = false,
+                    User = users[1]
+                },
+                new PersistedURL
+                {
+                    URL = "https://github.com/MathiasLorenz?tab=repositories",
+                    ShortURL = "iodjhgry",
+                    Deleted = true,
+                    User = users[1]
                 }
             };
 
