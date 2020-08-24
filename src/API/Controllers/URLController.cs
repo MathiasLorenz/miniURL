@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MiniURL.Application.PersistedURLs.Commands.Post;
 using MiniURL.Application.PersistedURLs.Queries.URLsForUser;
 
 namespace MiniURL.API.Controllers
@@ -14,6 +15,14 @@ namespace MiniURL.API.Controllers
                 UserId = userId,
                 IncludeDeleted = includeDeleted
             });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> Create(CreatePersistedURLCommand command)
+        {
+            var id = await Mediator.Send(command);
+
+            return Ok(id);
         }
     }
 }
