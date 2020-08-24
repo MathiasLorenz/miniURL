@@ -1,14 +1,11 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MiniURL.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MiniURL.Application.PersistedURLs.Queries.URLsForUser
+namespace MiniURL.Application.PersistedURLs.Queries.URLsForUser // Todo: Fix this awful namespace
 {
     public class GetURLsForUserQuery : IRequest<URLsForUserVm>
     {

@@ -10,11 +10,13 @@ namespace MiniURL.API.Controllers
         [HttpGet("{userId}")]
         public async Task<ActionResult<URLsForUserVm>> Get(int userId, bool includeDeleted)
         {
-            return await Mediator.Send(new GetURLsForUserQuery()
+            var response = await Mediator.Send(new GetURLsForUserQuery()
             {
                 UserId = userId,
                 IncludeDeleted = includeDeleted
             });
+
+            return Ok(response);
         }
 
         [HttpPost]
