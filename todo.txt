@@ -1,4 +1,5 @@
 Things to do in no particular order:
 
+Change GenerateShortURL method to GenerateUniqueShortURL.
 Fix that godawful namespace of the GetURLsForUserQuery class.
 Implement exception handling s.t. I can return BadRequest, NotFound and other HTTP codes.
