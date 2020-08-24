@@ -11,6 +11,7 @@ namespace MiniURL.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IRNGCrypto, RNGCrypto>();
+            services.AddScoped<ITokenGenerator, TokenGenerator>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
