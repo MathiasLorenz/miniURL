@@ -17,8 +17,8 @@ namespace MiniURL.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.ShortURL)
                 .IsRequired()
-                .HasMaxLength(8) // I should probably configure this length somewhere...
-                .IsFixedLength(true);
+                .HasColumnType("nvarchar(40)") // This was fixed length before and I had to specify this explicitly now for it to work properly.
+                .HasMaxLength(40); // The actual length is configured in the appsettings.json file.
 
             builder.Property(x => x.Deleted)
                 .IsRequired();
