@@ -4,7 +4,7 @@ using MiniURL.Domain.Entities;
 
 namespace MiniURL.Infrastructure.Persistence.Configurations
 {
-    public class PersistedURLConfiguration : IEntityTypeConfiguration<PersistedURL>
+    internal class PersistedURLConfiguration : IEntityTypeConfiguration<PersistedURL>
     {
         public void Configure(EntityTypeBuilder<PersistedURL> builder)
         {
