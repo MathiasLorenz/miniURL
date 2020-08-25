@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MiniURL.Application.Common;
+using MiniURL.Application.Common.Interfaces;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace MiniURL.Application.Tests.Common
         // We are now dependent on the implementation and the given string, but that's how it is
         private readonly HashSet<char> _allowedChars =
             new HashSet<char>("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-");
-        private readonly TokenGenerator _generator = new TokenGenerator(new RNGCrypto());
+        private readonly ITokenGenerator _generator = new TokenGenerator(new RNGCrypto());
 
         [TestMethod]
         [DataRow(2)]
