@@ -4,6 +4,19 @@ My implementation of a URL shortening service.
 
 Still very much a work in progress. The idea is to first create the full API and afterwards maybe build a Blazor front-end on top. As I'm no front-end engineer, this will only be done if time allows and I find the motivation.
 
+## Technologies and frameworks
+
+* .NET Core 3.1
+* ASP.NET Core
+* Entity Framework Core with Microsoft SQL Server
+* MediatR for lean controllers and CQRS
+* Microsoft DependencyInjection for DI and IoC
+* Shouldly for testing
+* Moq for mocking in testing
+
+## Structure and organization
+
+The structure is heavily inspired from Jason Taylor's excellent work with 'clean code' style orginization within .NET projects. The main inspirations are from the repositories [Clean Architecture](https://github.com/jasontaylordev/CleanArchitecture), [Northwind Traders](https://github.com/jasontaylordev/NorthwindTraders) and various talks from Jason Taylor. I don't need use the clean architecture template, because I didn't want the Angular front-end, so I have build everything up myself drawing heavy inspiration from the linked repositories.
 
 ## Migrations
 
