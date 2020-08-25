@@ -29,7 +29,7 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
                                       CancellationToken cancellationToken)
         {
             var user = request?.UserId != null ? await _ctx.Users.FindAsync(request.UserId) : null;
-            var shortURL = await GenerateShortURL();
+            var shortURL = await GenerateUniqueShortURL();
 
             var persistedURL = new PersistedURL
             {
@@ -44,13 +44,13 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
             return persistedURL.Id;
         }
 
-        private async Task<string> GenerateShortURL()
+        private async Task<string> GenerateUniqueShortURL()
         {
             var token = "";
 
             do
             {
-                token = _tokenGenerator.GetUniqueKey(8);
+                token = _tokenGenerator.GetUniqueKey();
             } while (await _ctx.PersistedURLs.FirstOrDefaultAsync(x => x.ShortURL == token) != null);
 
             return token;

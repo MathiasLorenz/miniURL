@@ -1,6 +1,6 @@
-﻿using MiniURL.Application.Common.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using MiniURL.Application.Common.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace MiniURL.Application.Common
@@ -10,29 +10,40 @@ namespace MiniURL.Application.Common
     public class TokenGenerator : ITokenGenerator
     {
         private readonly IRNGCrypto _crypto;
+        private readonly int _tokenLength;
 
-        public TokenGenerator(IRNGCrypto rNGCrypto)
+        public TokenGenerator(IRNGCrypto rNGCrypto,
+                              IConfiguration configuration)
         {
             _crypto = rNGCrypto;
+            
+            _tokenLength = GetTokenLength(configuration);
         }
 
-        public string GetUniqueKey(int length)
+        private int GetTokenLength(IConfiguration configuration)
         {
-            if (length <= 0)
+            int length = configuration.GetValue<int>("ShortURLStringLength");
+
+            if (length < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(GetUniqueKey));
+                throw new ArgumentOutOfRangeException(nameof(_tokenLength));
             }
 
+            return length;
+        }
+
+        public string GetUniqueKey()
+        {
             // The chars array "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.-" has length 64 and
             // therefore divides the size of a byte evenly (256 % 64 = 0).
             // If another array is used that does not divide 64 this has to be taken care of.
             var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-".AsSpan();
             int charsLength = chars.Length; // Has to be exactly 64 to divide a byte.
-            var data = new byte[length];
+            var data = new byte[_tokenLength];
 
             _crypto.GetBytes(data);
 
-            var builder = new StringBuilder(length);
+            var builder = new StringBuilder(_tokenLength);
 
             foreach (var b in data)
             {

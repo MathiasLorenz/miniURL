@@ -2,6 +2,6 @@
 {
     public interface ITokenGenerator
     {
-        string GetUniqueKey(int length);
+        string GetUniqueKey();
     }
 }
