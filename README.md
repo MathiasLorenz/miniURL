@@ -7,12 +7,13 @@ Still very much a work in progress. The idea is to first create the full API and
 ## Technologies and frameworks
 
 * .NET Core 3.1
-* ASP.NET Core
-* Entity Framework Core with Microsoft SQL Server
+* ASP.NET Core 3.1
+* Entity Framework Core 3.1 with Microsoft SQL Server
 * MediatR for lean controllers and CQRS
 * Microsoft DependencyInjection for DI and IoC
 * Shouldly for testing
 * Moq for mocking in testing
+* FluentValidation for request validation
 
 ## Structure and organization
 
