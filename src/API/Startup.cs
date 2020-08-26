@@ -1,9 +1,11 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MiniURL.Application;
+using MiniURL.Application.Common.Interfaces;
 using MiniURL.Infrastructure;
 
 namespace MiniURL.API
@@ -23,7 +25,11 @@ namespace MiniURL.API
             services.AddInfrastructure(Configuration);
             services.AddApplication();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(opt => 
+                {
+                    opt.RegisterValidatorsFromAssemblyContaining<IMiniURLDbContext>();
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
