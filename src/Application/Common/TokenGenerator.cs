@@ -20,18 +20,6 @@ namespace MiniURL.Application.Common
             _tokenLength = GetTokenLength(configuration);
         }
 
-        private int GetTokenLength(IConfiguration configuration)
-        {
-            int length = configuration.GetValue<int>("ShortURLStringLength");
-
-            if (length < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(_tokenLength));
-            }
-
-            return length;
-        }
-
         public string GetUniqueKey()
         {
             // The chars array "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.-" has length 64 and
@@ -51,6 +39,18 @@ namespace MiniURL.Application.Common
             }
 
             return builder.ToString();
+        }
+
+        private int GetTokenLength(IConfiguration configuration)
+        {
+            int length = configuration.GetValue<int>("ShortURLStringLength");
+
+            if (length < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(_tokenLength));
+            }
+
+            return length;
         }
     }
 }
