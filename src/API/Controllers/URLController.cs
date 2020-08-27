@@ -7,8 +7,8 @@ namespace MiniURL.API.Controllers
 {
     public class URLController : ApiController
     {
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<URLsForUserVm>> Get(int userId, bool includeDeleted)
+        [HttpGet("[action]/{userId}")]
+        public async Task<ActionResult<URLsForUserVm>> GetForUser(int userId, bool includeDeleted)
         {
             var response = await Mediator.Send(new GetURLsForUserQuery()
             {
