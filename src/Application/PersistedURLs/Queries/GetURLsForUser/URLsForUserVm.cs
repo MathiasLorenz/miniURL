@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MiniURL.Application.PersistedURLs.Queries.URLsForUser
+namespace MiniURL.Application.PersistedURLs.Queries.GetURLsForUser
 {
     public class URLsForUserVm
     {

@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MiniURL.Application.PersistedURLs.Commands.Post;
-using MiniURL.Application.PersistedURLs.Queries.URLsForUser;
+using MiniURL.Application.PersistedURLs.Queries.GetPersistedURL;
+using MiniURL.Application.PersistedURLs.Queries.GetURLsForUser;
 
 namespace MiniURL.API.Controllers
 {
@@ -15,6 +16,14 @@ namespace MiniURL.API.Controllers
                 UserId = userId,
                 IncludeDeleted = includeDeleted
             });
+
+            return Ok(response);
+        }
+
+        [HttpGet("{shortURL}")]
+        public async Task<ActionResult<int>> GetOriginalFromShortURL(string shortURL)
+        {
+            var response = await Mediator.Send(new GetPersistedURLQuery() { ShortURL = shortURL });
 
             return Ok(response);
         }

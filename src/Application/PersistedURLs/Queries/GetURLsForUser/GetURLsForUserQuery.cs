@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MiniURL.Application.PersistedURLs.Queries.URLsForUser // Todo: Fix this awful namespace
+namespace MiniURL.Application.PersistedURLs.Queries.GetURLsForUser
 {
     public class GetURLsForUserQuery : IRequest<URLsForUserVm>
     {

@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace MiniURL.Application.PersistedURLs.Queries.URLsForUser
+namespace MiniURL.Application.PersistedURLs.Queries.GetURLsForUser
 {
     public class GetURLsForUserQueryValidator : AbstractValidator<GetURLsForUserQuery>
     {
