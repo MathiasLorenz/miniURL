@@ -1,5 +1,5 @@
 Things to do in no particular order:
 
-Fix that godawful namespace of the GetURLsForUserQuery class.
 Implement exception handling s.t. I can return BadRequest, NotFound and other HTTP codes.
 Create in memory testing server so that testing can be done without persisting.
+Create AuditableEntity (or similar) for automatic createdAt etc for entities.
