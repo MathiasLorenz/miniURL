@@ -11,8 +11,8 @@ namespace MiniURL.Application.Common.Interfaces
     // This introduced a dependency on both EF Core and the Domain project...
     public interface IMiniURLDbContext
     {
-        public DbSet<User> Users { get; }
-        public DbSet<PersistedURL> PersistedURLs { get; }
+        DbSet<User> Users { get; }
+        DbSet<PersistedURL> PersistedURLs { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
