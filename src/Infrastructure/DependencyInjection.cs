@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MiniURL.Application.Common.Interfaces;
 using MiniURL.Infrastructure.Persistence;
-using System;
+using MiniURL.Infrastructure.Services;
 
 namespace MiniURL.Infrastructure
 {
@@ -25,6 +25,8 @@ namespace MiniURL.Infrastructure
             }
 
             services.AddScoped<IMiniURLDbContext>(provider => provider.GetService<MiniURLDbContext>());
+
+            services.AddTransient<IDateTime, DateTimeService>();
 
             return services;
         }

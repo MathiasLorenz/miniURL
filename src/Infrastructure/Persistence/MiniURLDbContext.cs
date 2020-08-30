@@ -2,7 +2,6 @@
 using MiniURL.Application.Common.Interfaces;
 using MiniURL.Domain.Common;
 using MiniURL.Domain.Entities;
-using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,9 +10,13 @@ namespace MiniURL.Infrastructure.Persistence
 {
     public class MiniURLDbContext : DbContext, IMiniURLDbContext
     {
-        public MiniURLDbContext(DbContextOptions<MiniURLDbContext> options)
+        private readonly IDateTime _dateTime;
+
+        public MiniURLDbContext(DbContextOptions<MiniURLDbContext> options,
+                                IDateTime dateTime)
             : base(options)
         {
+            _dateTime = dateTime;
         }
 
         public DbSet<User> Users { get; set; }
@@ -26,10 +29,10 @@ namespace MiniURL.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedAt = DateTime.Now; // Todo: Create service to remove this dependency.
+                        entry.Entity.CreatedAt = _dateTime.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModified = DateTime.Now; // Todo: Create service to remove this dependency.
+                        entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
             }
