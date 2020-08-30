@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MiniURL.Domain.Common;
 
 namespace MiniURL.Domain.Entities
 {
-    public class PersistedURL
+    public class PersistedURL : AuditableEntity
     {
         public int Id { get; set; }
         public int? UserId { get; set; }
