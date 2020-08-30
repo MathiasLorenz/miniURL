@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniURL.Infrastructure.Persistence;
 
 namespace MiniURL.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(MiniURLDbContext))]
-    partial class MiniURLDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200830191359_AddedAuditableEntity")]
+    partial class AddedAuditableEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
