@@ -4,8 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MiniURL.Application.Common.Interfaces;
 using MiniURL.Infrastructure.Persistence;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MiniURL.Infrastructure
 {
