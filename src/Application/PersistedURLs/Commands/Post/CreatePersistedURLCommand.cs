@@ -35,7 +35,7 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
             {
                 URL = request.URL,
                 ShortURL = shortURL,
-                User = user ??= null
+                User = user ?? null
             };
 
             await _ctx.PersistedURLs.AddAsync(persistedURL);
