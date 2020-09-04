@@ -35,6 +35,10 @@ namespace MiniURL.API.Common
 
             switch (exception)
             {
+                case BadRequestException badRequestException:
+                    code = HttpStatusCode.BadRequest;
+                    result = badRequestException.Message;
+                    break;
                 case NotFoundException _:
                     code = HttpStatusCode.NotFound;
                     break;

@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MiniURL.Application.Common.Exceptions;
 using MiniURL.Application.Common.Interfaces;
 using MiniURL.Domain.Entities;
 
@@ -28,7 +29,14 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
         public async Task<int> Handle(CreatePersistedURLCommand request,
                                       CancellationToken cancellationToken)
         {
-            var user = request?.UserId != null ? await _ctx.Users.FindAsync(request.UserId) : null;
+            User? user = null;
+            if (request?.UserId != null)
+            {
+                user = await _ctx.Users.FindAsync(request.UserId);
+                if (user == null) throw new BadRequestException("The specified user is unknown.");
+            }
+
+
             var shortURL = await GenerateUniqueShortURL();
 
             var persistedURL = new PersistedURL
