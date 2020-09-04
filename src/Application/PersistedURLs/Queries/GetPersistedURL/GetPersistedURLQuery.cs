@@ -9,7 +9,7 @@ namespace MiniURL.Application.PersistedURLs.Queries.GetPersistedURL
 {
     public class GetPersistedURLQuery : IRequest<PersistedURLVm>
     {
-        public string ShortURL { get; set; }
+        public string ShortURL { get; set; } = null!;
     }
 
     public class GetPersistedURLQueryHandler : IRequestHandler<GetPersistedURLQuery, PersistedURLVm>

@@ -10,7 +10,7 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
     public class CreatePersistedURLCommand : IRequest<int>
     {
         public int? UserId { get; set; } = null;
-        public string URL { get; set; }
+        public string URL { get; set; } = null!;
     }
 
     public class CreatePersistedURLCommandHandler : IRequestHandler<CreatePersistedURLCommand, int>
@@ -33,7 +33,7 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
 
             var persistedURL = new PersistedURL
             {
-                URL = request.URL,
+                URL = request.URL, // request cannot be null, but I still get a warning for that it might be :(
                 ShortURL = shortURL,
                 User = user ?? null
             };

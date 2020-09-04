@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
     <RootNamespace>MiniURL.Application</RootNamespace>
     <AssemblyName>MiniURL.Application</AssemblyName>
   </PropertyGroup>
