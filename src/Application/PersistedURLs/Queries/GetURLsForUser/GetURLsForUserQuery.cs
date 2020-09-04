@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MiniURL.Application.Common.Interfaces;
-using MiniURL.Application.Exceptions;
+using MiniURL.Application.Common.Exceptions;
 using MiniURL.Domain.Entities;
 using System.Linq;
 using System.Threading;

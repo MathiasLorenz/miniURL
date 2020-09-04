@@ -3,7 +3,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using MiniURL.Application.Exceptions;
+using MiniURL.Application.Common.Exceptions;
 
 namespace MiniURL.API.Common
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace MiniURL.Application.Exceptions
+namespace MiniURL.Application.Common.Exceptions
 {
     public class NotFoundException : Exception
     {
