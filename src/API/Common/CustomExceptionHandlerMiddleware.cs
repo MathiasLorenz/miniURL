@@ -31,13 +31,12 @@ namespace MiniURL.API.Common
         private Task HandleExceptionAsync(HttpContext ctx, Exception exception)
         {
             var code = HttpStatusCode.InternalServerError; // Base error
-            var result = string.Empty;
+            var result = String.Empty; // Set in switch if the exception does not have a proper message.
 
             switch (exception)
             {
                 case BadRequestException badRequestException:
                     code = HttpStatusCode.BadRequest;
-                    result = badRequestException.Message;
                     break;
                 case NotFoundException _:
                     code = HttpStatusCode.NotFound;
@@ -47,12 +46,13 @@ namespace MiniURL.API.Common
             ctx.Response.ContentType = "application/json";
             ctx.Response.StatusCode = (int)code;
 
-            if (result == string.Empty)
+            var error = JsonSerializer.Serialize(new
             {
-                result = JsonSerializer.Serialize(new { error = exception.Message });
-            }
+                code = (int)code,
+                error = String.IsNullOrEmpty(result) ? exception.Message : result
+            });
 
-            return ctx.Response.WriteAsync(result);
+            return ctx.Response.WriteAsync(error);
         }
     }
 }
