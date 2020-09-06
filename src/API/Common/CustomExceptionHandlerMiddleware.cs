@@ -34,7 +34,6 @@ namespace MiniURL.API.Common
         private Task HandleExceptionAsync(HttpContext ctx, Exception exception)
         {
             var code = HttpStatusCode.InternalServerError; // Base error
-            var customErrorMessage = String.Empty; // Set in switch if the exception does not have a proper message.
 
             switch (exception)
             {
@@ -50,18 +49,15 @@ namespace MiniURL.API.Common
             ctx.Response.ContentType = "application/json";
             ctx.Response.StatusCode = statusCode;
 
-            var errorMessage = ExtractErrorMessage(customErrorMessage, exception.Message);
+            var exceptionMessage = exception.Message;
 
-            var error = SerializeError(statusCode, errorMessage);
-            _logger.LogError($"Exception thrown in pipeline. Error message: { errorMessage }");
+            var error = SerializeError(statusCode, exceptionMessage);
+            _logger.LogError($"Exception thrown in pipeline. Error message: { exceptionMessage }");
 
             return ctx.Response.WriteAsync(error);
         }
 
-        private string ExtractErrorMessage(string errorMessage, string exceptionMessage)
-            => String.IsNullOrEmpty(errorMessage) ? exceptionMessage : errorMessage;
-
-        private string SerializeError(int code, string? errorMessage)
+        private string SerializeError(int code, string errorMessage)
         {
             return JsonSerializer.Serialize(new
             {
