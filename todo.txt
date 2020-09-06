@@ -1,5 +1,4 @@
 Things to do in no particular order:
 
 Create in memory testing server so that testing can be done without persisting.
-Consider the ValidationBehavior - I'm pretty certain it is never called now, because validations are handled
-    at model binding within MVC.
+Setup AsNoTracking on read-only queries.
