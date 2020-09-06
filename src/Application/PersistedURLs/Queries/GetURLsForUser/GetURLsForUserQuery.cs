@@ -27,7 +27,10 @@ namespace MiniURL.Application.PersistedURLs.Queries.GetURLsForUser
         public async Task<URLsForUserVm> Handle(GetURLsForUserQuery request, CancellationToken cancellationToken)
         {
             var user = await _ctx.Users.FindAsync(request.UserId);
-            if (user == null) throw new NotFoundException(nameof(User), request.UserId);
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(User), request.UserId);
+            }
 
             var urls = await _ctx.PersistedURLs
                 .Where(x => x.UserId == request.UserId)
