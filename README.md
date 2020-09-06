@@ -8,7 +8,9 @@ Still very much a work in progress. The idea is to first create the full API and
 
 * .NET Core 3.1
 * ASP.NET Core 3.1
-* Entity Framework Core 3.1 with Microsoft SQL Server
+* Entity Framework Core 3.1 with providers
+  * Microsoft SQL Server
+  * Microsoft In Memory
 * MediatR for lean controllers, CQRS and pipeline behaviors
 * Microsoft DependencyInjection for DI and IoC
 * Microsoft console logging
