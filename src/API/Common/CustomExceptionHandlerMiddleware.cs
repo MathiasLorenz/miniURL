@@ -31,7 +31,7 @@ namespace MiniURL.API.Common
         private Task HandleExceptionAsync(HttpContext ctx, Exception exception)
         {
             var code = HttpStatusCode.InternalServerError; // Base error
-            var result = String.Empty; // Set in switch if the exception does not have a proper message.
+            var errorMessage = String.Empty; // Set in switch if the exception does not have a proper message.
 
             switch (exception)
             {
@@ -46,13 +46,18 @@ namespace MiniURL.API.Common
             ctx.Response.ContentType = "application/json";
             ctx.Response.StatusCode = (int)code;
 
-            var error = JsonSerializer.Serialize(new
-            {
-                code = (int)code,
-                error = String.IsNullOrEmpty(result) ? exception.Message : result
-            });
+            var error = SerializeError((int)code, errorMessage, exception.Message);
 
             return ctx.Response.WriteAsync(error);
+        }
+
+        private string SerializeError(int code, string? errorMessage, string exceptionMessage)
+        {
+            return JsonSerializer.Serialize(new
+            {
+                code = (int)code,
+                error = String.IsNullOrEmpty(errorMessage) ? exceptionMessage : errorMessage
+            });
         }
     }
 }
