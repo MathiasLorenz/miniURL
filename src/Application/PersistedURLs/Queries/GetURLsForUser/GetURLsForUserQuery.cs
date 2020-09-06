@@ -29,12 +29,16 @@ namespace MiniURL.Application.PersistedURLs.Queries.GetURLsForUser
             var user = await _ctx.Users.FindAsync(request.UserId);
             if (user == null) throw new NotFoundException(nameof(User), request.UserId);
 
-            var urls = await _ctx.PersistedURLs.Where(x => x.UserId == request.UserId).ToListAsync();
+            var urls = await _ctx.PersistedURLs
+                .Where(x => x.UserId == request.UserId)
+                .ToListAsync();
 
             // This should be possible to do in one go above, no?
             if (request.IncludeDeleted == false)
             {
-                urls = urls.Where(x => x.Deleted == false).ToList();
+                urls = urls
+                    .Where(x => x.Deleted == false)
+                    .ToList();
             }
 
             var urlDtos = urls.Select(x => new URLsForUserDto
