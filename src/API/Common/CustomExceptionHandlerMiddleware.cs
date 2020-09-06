@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using MiniURL.Application.Common.Exceptions;
 
 namespace MiniURL.API.Common
@@ -10,10 +11,12 @@ namespace MiniURL.API.Common
     public class CustomExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
 
-        public CustomExceptionHandlerMiddleware(RequestDelegate next)
+        public CustomExceptionHandlerMiddleware(RequestDelegate next, ILogger<CustomExceptionHandlerMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext ctx)
@@ -31,7 +34,7 @@ namespace MiniURL.API.Common
         private Task HandleExceptionAsync(HttpContext ctx, Exception exception)
         {
             var code = HttpStatusCode.InternalServerError; // Base error
-            var errorMessage = String.Empty; // Set in switch if the exception does not have a proper message.
+            var customErrorMessage = String.Empty; // Set in switch if the exception does not have a proper message.
 
             switch (exception)
             {
@@ -43,20 +46,27 @@ namespace MiniURL.API.Common
                     break;
             }
 
+            var statusCode = (int)code;
             ctx.Response.ContentType = "application/json";
-            ctx.Response.StatusCode = (int)code;
+            ctx.Response.StatusCode = statusCode;
 
-            var error = SerializeError((int)code, errorMessage, exception.Message);
+            var errorMessage = ExtractErrorMessage(customErrorMessage, exception.Message);
+
+            var error = SerializeError(statusCode, errorMessage);
+            _logger.LogError($"Exception thrown in pipeline. Error message: { errorMessage }");
 
             return ctx.Response.WriteAsync(error);
         }
 
-        private string SerializeError(int code, string? errorMessage, string exceptionMessage)
+        private string ExtractErrorMessage(string errorMessage, string exceptionMessage)
+            => String.IsNullOrEmpty(errorMessage) ? exceptionMessage : errorMessage;
+
+        private string SerializeError(int code, string? errorMessage)
         {
             return JsonSerializer.Serialize(new
             {
                 code = (int)code,
-                error = String.IsNullOrEmpty(errorMessage) ? exceptionMessage : errorMessage
+                error = errorMessage
             });
         }
     }
