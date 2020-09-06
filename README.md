@@ -9,8 +9,9 @@ Still very much a work in progress. The idea is to first create the full API and
 * .NET Core 3.1
 * ASP.NET Core 3.1
 * Entity Framework Core 3.1 with Microsoft SQL Server
-* MediatR for lean controllers and CQRS
+* MediatR for lean controllers, CQRS and pipeline behaviors
 * Microsoft DependencyInjection for DI and IoC
+* Microsoft console logging
 * Shouldly for testing
 * Moq for mocking in testing
 * FluentValidation for request validation
