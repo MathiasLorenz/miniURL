@@ -3,7 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MiniURL.Application.Common.Exceptions;
 using MiniURL.Application.Common.Interfaces;
+using MiniURL.Domain.Entities;
 
 namespace MiniURL.Application.PersistedURLs.Queries.GetPersistedURL
 {
@@ -27,8 +29,10 @@ namespace MiniURL.Application.PersistedURLs.Queries.GetPersistedURL
             var persistedUrl = await _ctx.PersistedURLs
                 .Where(x => x.Deleted == false)
                 .FirstOrDefaultAsync(x => x.ShortURL == request.ShortURL);
-
-            // Todo: Throw NotFound on null return
+            if (persistedUrl == null)
+            {
+                throw new NotFoundException(nameof(PersistedURL), request.ShortURL);
+            }
 
             var vm = new PersistedURLVm
             {
