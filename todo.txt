@@ -1,4 +1,5 @@
 Things to do in no particular order:
 
-Create in memory testing server so that testing can be done without persisting.
+Create in memory testing server so that testing can be done without persisting. Go through all queries/commands and make appropriate tests.
 Setup AsNoTracking on read-only queries.
+Error message in responses from exceptions do not handle "s properly.
