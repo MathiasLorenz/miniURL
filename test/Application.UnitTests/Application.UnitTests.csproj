@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>MiniURL.Application.Tests</RootNamespace>
-    <AssemblyName>MiniURL.Application.Tests</AssemblyName>
+    <RootNamespace>MiniURL.Application.UnitTests</RootNamespace>
+    <AssemblyName>MiniURL.Application.UnitTests</AssemblyName>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
