@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,16 +11,16 @@ namespace MiniURL.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
-            SeedDb(host);
+            await SeedDb(host);
             
-            host.Run();
+            await host.RunAsync();
         }
 
-        private async static void SeedDb(IHost host)
+        private async static Task SeedDb(IHost host)
         {
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
