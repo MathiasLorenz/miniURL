@@ -33,9 +33,11 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
             if (request?.UserId != null)
             {
                 user = await _ctx.Users.FindAsync(request.UserId);
-                if (user == null) throw new BadRequestException("The specified user is unknown.");
+                if (user == null)
+                {
+                    throw new BadRequestException("The specified user is unknown.");
+                }
             }
-
 
             var shortURL = await GenerateUniqueShortURL();
 
