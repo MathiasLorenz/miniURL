@@ -45,7 +45,7 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
             {
                 URL = request.URL, // request cannot be null, but I still get a warning for that it might be :(
                 ShortURL = shortURL,
-                User = user ?? null
+                User = user
             };
 
             await _ctx.PersistedURLs.AddAsync(persistedURL);
@@ -54,6 +54,8 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
             return persistedURL.Id;
         }
 
+        // This should probably be factored out and injected. I can mock the TokenGenerator,
+        // which is already done in tests, but I cannot test this by itself.
         private async Task<string> GenerateUniqueShortURL()
         {
             var token = "";
