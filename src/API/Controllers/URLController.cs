@@ -25,7 +25,7 @@ namespace MiniURL.API.Controllers
         {
             var response = await Mediator.Send(new GetPersistedURLQuery() { ShortURL = shortURL });
 
-            return Ok(response);
+            return Redirect(response.URL);
         }
 
         [HttpPost]
