@@ -35,17 +35,20 @@ namespace MiniURL.Application.PersistedURLs.Queries.GetURLsForUser
             var urls = await _ctx.PersistedURLs
                 .Where(x => x.UserId == request.UserId)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToDictionaryAsync(x => x.Id, x => x);
 
-            // This should be possible to do in one go above, no?
             if (request.IncludeDeleted == false)
             {
-                urls = urls
-                    .Where(x => x.Deleted == false)
-                    .ToList();
+                foreach ((var id, var url) in urls)
+                {
+                    if (url.Deleted)
+                    {
+                        urls.Remove(id);
+                    }
+                }
             }
 
-            var urlDtos = urls.Select(x => new URLsForUserDto
+            var urlDtos = urls.Values.Select(x => new URLsForUserDto
             {
                 URL = x.URL,
                 ShortUrl = x.ShortURL,
