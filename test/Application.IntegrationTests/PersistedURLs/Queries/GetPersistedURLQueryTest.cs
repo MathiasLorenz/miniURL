@@ -9,7 +9,7 @@ using Shouldly;
 namespace MiniURL.Application.IntegrationTests.PersistedURLs.Queries
 {
     [TestClass]
-    public class GetPersistedURLCommandTest : BaseTest
+    public class GetPersistedURLQueryTest : BaseTest
     {
         [TestMethod]
         public async Task Handle_RequestUnknownShortURL_ThrowsException()

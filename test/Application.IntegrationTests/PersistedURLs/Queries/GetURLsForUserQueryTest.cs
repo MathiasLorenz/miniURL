@@ -11,7 +11,7 @@ using Shouldly;
 namespace MiniURL.Application.IntegrationTests.PersistedURLs.Queries
 {
     [TestClass]
-    public class GetURLsForUserCommandTest : BaseTest
+    public class GetURLsForUserQueryTest : BaseTest
     {
         [TestMethod]
         public async Task GetURLsForUser_InvalidUser_ThrowsException()
