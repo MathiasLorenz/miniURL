@@ -8,6 +8,9 @@ namespace MiniURL.API.Controllers
 {
     public class URLController : ApiController
     {
+        // Todo: There might be a compelling argument for moving this into a user controller and be
+        // something like /user/{id}/urls/{option:includefalse}.
+        // I'm not to strong in this, but I think that would make sense.
         [HttpGet("[action]/{userId}")]
         public async Task<ActionResult<URLsForUserVm>> GetForUser(int userId, bool includeDeleted)
         {
