@@ -11,12 +11,14 @@ namespace MiniURL.Infrastructure.Persistence
             {
                 new User
                 {
+                    Id = 1,
                     FirstName = "Første",
                     LastName = "Manden",
                     Email = "sup@sup.com"
                 },
                 new User
                 {
+                    Id = 2,
                     FirstName = "Anden",
                     LastName = "Drengen",
                     Email = "what@up.com"
@@ -26,8 +28,10 @@ namespace MiniURL.Infrastructure.Persistence
             return users;
         }
 
-        public static List<PersistedURL> PersistedURLs(List<User> users)
+        public static List<PersistedURL> PersistedURLs()
         {
+            var users = Users();
+
             var persistedURLs = new List<PersistedURL>
             {
                 new PersistedURL
@@ -39,7 +43,7 @@ namespace MiniURL.Infrastructure.Persistence
                 {
                     URL = "https://www.dr.dk/drtv/",
                     ShortURL = "objuyhgl",
-                    User = users[0]
+                    UserId = users[0].Id,
                 },
                 new PersistedURL
                 {
@@ -52,14 +56,14 @@ namespace MiniURL.Infrastructure.Persistence
                     URL = "https://github.com/MathiasLorenz",
                     ShortURL = "iodfetry",
                     Deleted = false,
-                    User = users[1]
+                    UserId = users[1].Id,
                 },
                 new PersistedURL
                 {
                     URL = "https://github.com/MathiasLorenz?tab=repositories",
                     ShortURL = "iodjhgry",
                     Deleted = true,
-                    User = users[1]
+                    UserId = users[1].Id,
                 }
             };
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniURL.Application.Common.Interfaces;
+using MiniURL.Domain.Entities;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,10 +30,23 @@ namespace MiniURL.Infrastructure.Persistence
                 return;
             }
 
-            var users = await _ctx.Users.ToListAsync();
-            var entities = SeedData.PersistedURLs(users);
+            var users = await _ctx.Users.ToDictionaryAsync(x => x.Id, x => x);
+            var entities = SeedData.PersistedURLs();
+            AttachDbUsersToEntities(entities, users);
+
             await _ctx.PersistedURLs.AddRangeAsync(entities);
             await _ctx.SaveChangesAsync(cancellationToken);
+        }
+
+        private void AttachDbUsersToEntities(List<PersistedURL> entities, Dictionary<int, User> users)
+        {
+            foreach (var entity in entities)
+            {
+                if (entity.UserId != null)
+                {
+                    entity.User = users[(int)entity.UserId];
+                }
+            }
         }
 
         private async Task SeedUsers(CancellationToken cancellationToken)
