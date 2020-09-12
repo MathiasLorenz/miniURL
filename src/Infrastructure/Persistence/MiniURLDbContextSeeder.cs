@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniURL.Application.Common.Interfaces;
-using MiniURL.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,44 +29,8 @@ namespace MiniURL.Infrastructure.Persistence
             }
 
             var users = await _ctx.Users.ToListAsync();
-
-            var list = new List<PersistedURL>
-            {
-                new PersistedURL
-                {
-                    URL = "www.google.com",
-                    ShortURL = "abcdefgh",
-                },
-                new PersistedURL
-                {
-                    URL = "https://www.dr.dk/drtv/",
-                    ShortURL = "objuyhgl",
-                    User = users[0]
-                },
-                new PersistedURL
-                {
-                    URL = "https://www.google.com/search?q=ef+core+renames+table&oq=ef+core+renames+table&aqs=chrome..69i57j0l7.10922j0j7&sourceid=chrome&ie=UTF-8",
-                    ShortURL = "objurhgi",
-                    Deleted = true
-                },
-                new PersistedURL
-                {
-                    URL = "https://github.com/MathiasLorenz",
-                    ShortURL = "iodfetry",
-                    Deleted = false,
-                    User = users[1]
-                },
-                new PersistedURL
-                {
-                    URL = "https://github.com/MathiasLorenz?tab=repositories",
-                    ShortURL = "iodjhgry",
-                    Deleted = true,
-                    User = users[1]
-                }
-            };
-
-            _ctx.PersistedURLs.AddRange(list);
-
+            var entities = SeedData.PersistedURLs(users);
+            await _ctx.PersistedURLs.AddRangeAsync(entities);
             await _ctx.SaveChangesAsync(cancellationToken);
         }
 
@@ -81,22 +41,8 @@ namespace MiniURL.Infrastructure.Persistence
                 return;
             }
 
-            _ctx.Users.AddRange(new List<User>
-            {
-                new User
-                {
-                    FirstName = "Første",
-                    LastName = "Manden",
-                    Email = "sup@sup.com"
-                },
-                new User
-                {
-                    FirstName = "Anden",
-                    LastName = "Drengen",
-                    Email = "what@up.com"
-                }
-            });
-
+            var entities = SeedData.Users();
+            await _ctx.Users.AddRangeAsync(entities);
             await _ctx.SaveChangesAsync(cancellationToken);
         }
     }
