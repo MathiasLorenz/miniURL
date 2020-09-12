@@ -6,7 +6,7 @@ using MiniURL.Domain.Entities;
 using MiniURL.Infrastructure.Persistence;
 using Shouldly;
 
-namespace MiniURL.Application.IntegrationTests.PersistedURLs.Queries.GetPersistedURL
+namespace MiniURL.Application.IntegrationTests.PersistedURLs.Queries
 {
     [TestClass]
     public class GetPersistedURLCommandTest : BaseTest
