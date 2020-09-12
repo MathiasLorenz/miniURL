@@ -20,11 +20,10 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
             var mockedShortURL = "";
             var originalURL = "";
 
-            var userId = await SetupUser();
+            var userId = await CreateAUser(DbOptions, DateTimeService);
             
             await Should.ThrowAsync<BadRequestException>(
-                () => SetupHandlerAndHandle(mockedShortURL, originalURL, userId + 1)
-            );
+                SetupHandlerAndHandle(mockedShortURL, originalURL, userId + 1));
         }
 
         [TestMethod]
@@ -51,7 +50,7 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
             var mockedShortURL = "abcdefgh";
             var originalURL = "www.somewebsite.com";
 
-            var userId = await SetupUser();
+            var userId = await CreateAUser(DbOptions, DateTimeService);
             var persistedURLId = await SetupHandlerAndHandle(mockedShortURL, originalURL, userId);
 
             using (var ctx = new MiniURLDbContext(DbOptions, DateTimeService))
@@ -89,24 +88,6 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
                 result.ShouldBeGreaterThan(0);
                 
                 return result;
-            }
-        }
-
-        private async Task<int> SetupUser()
-        {
-            using (var ctx = new MiniURLDbContext(DbOptions, DateTimeService))
-            {
-                var entity = new User
-                {
-                    FirstName = "Første",
-                    LastName = "Manden",
-                    Email = "sup@sup.com"
-                };
-
-                ctx.Users.Add(entity);
-                await ctx.SaveChangesAsync();
-
-                return entity.Id;
             }
         }
     }

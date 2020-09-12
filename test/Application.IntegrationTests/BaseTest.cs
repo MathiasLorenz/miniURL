@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MiniURL.Application.Common.Interfaces;
+using MiniURL.Domain.Entities;
 using MiniURL.Infrastructure.Persistence;
 using Moq;
 
@@ -38,6 +39,24 @@ namespace MiniURL.Application.IntegrationTests
                 {
                     throw ex;
                 }
+            }
+        }
+
+        public static async Task<int> CreateAUser(DbContextOptions<MiniURLDbContext> dbOptions, IDateTime dateTime)
+        {
+            using (var ctx = new MiniURLDbContext(dbOptions, dateTime))
+            {
+                var entity = new User
+                {
+                    FirstName = "A",
+                    LastName = "VeryNiceUser",
+                    Email = "heh@meddig.com"
+                };
+
+                ctx.Users.Add(entity);
+                await ctx.SaveChangesAsync();
+
+                return entity.Id;
             }
         }
     }
