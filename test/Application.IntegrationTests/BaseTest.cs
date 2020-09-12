@@ -30,7 +30,6 @@ namespace MiniURL.Application.IntegrationTests
             using (var ctx = new MiniURLDbContext(dbOptions, dateTime))
             {
                 ctx.Database.EnsureDeleted();
-                await ctx.SaveChangesAsync();
 
                 var seeder = new MiniURLDbContextSeeder(ctx);
 
@@ -50,15 +49,8 @@ namespace MiniURL.Application.IntegrationTests
             using (var ctx = new MiniURLDbContext(dbOptions, dateTime))
             {
                 ctx.Database.EnsureDeleted();
-                await ctx.SaveChangesAsync();
 
-                var entity = new User
-                {
-                    FirstName = "A",
-                    LastName = "VeryNiceUser",
-                    Email = "heh@meddig.com"
-                };
-
+                var entity = SeedData.Users()[0];
                 ctx.Users.Add(entity);
                 await ctx.SaveChangesAsync();
 
