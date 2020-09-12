@@ -34,6 +34,7 @@ namespace MiniURL.Application.PersistedURLs.Queries.GetURLsForUser
 
             var urls = await _ctx.PersistedURLs
                 .Where(x => x.UserId == request.UserId)
+                .AsNoTracking()
                 .ToListAsync();
 
             // This should be possible to do in one go above, no?

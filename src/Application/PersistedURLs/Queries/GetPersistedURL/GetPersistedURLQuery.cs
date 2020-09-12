@@ -28,6 +28,7 @@ namespace MiniURL.Application.PersistedURLs.Queries.GetPersistedURL
         {
             var persistedUrl = await _ctx.PersistedURLs
                 .Where(x => x.Deleted == false)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.ShortURL == request.ShortURL);
             if (persistedUrl == null)
             {

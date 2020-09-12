@@ -1,6 +1,5 @@
 Things to do in no particular order:
 
-Go through all queries/commands and make appropriate tests.
-Setup AsNoTracking on read-only queries.
 Error message in responses from exceptions do not handle "s properly.
 Consider moving GetForUser endpoint to user controller, see the comment above the endpoint.
+Fix up query in GetURLsForUser.
