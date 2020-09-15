@@ -1,8 +1,10 @@
 # miniURL
 
-My implementation of a URL shortening service.
+My for-fun implementation of a URL shortening service through and API.
 
-Still very much a work in progress. The idea is to first create the full API and afterwards maybe build a Blazor front-end on top. As I'm no front-end engineer, this will only be done if time allows and I find the motivation.
+Supports creation of shortened URLs by randomly generated identifiers and retrieving these (as a redirect) through the API. Only has a couple of hard coded users, as user administration has not been a priority yet.
+
+Things I want to do in the future (but no plans right now): User handling with IdentityServer4 and web front-end (Blazor?).
 
 ## Technologies and frameworks
 
@@ -12,7 +14,7 @@ Still very much a work in progress. The idea is to first create the full API and
   * Microsoft SQL Server
   * Microsoft In Memory
 * MediatR for lean controllers, CQRS and pipeline behaviors
-* Microsoft DependencyInjection for DI and IoC
+* Microsoft dependency injection for DI and IoC
 * Microsoft console logging
 * Shouldly for testing
 * Moq for mocking in testing
