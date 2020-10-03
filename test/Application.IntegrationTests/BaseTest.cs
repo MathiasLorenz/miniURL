@@ -11,7 +11,6 @@ namespace MiniURL.Application.IntegrationTests
     public class BaseTest
     {
         public DbContextOptions<MiniURLDbContext> DbOptions { get; set; } = new DbContextOptions<MiniURLDbContext>();
-
         public IDateTime DateTimeService { get; set; }
 
         public BaseTest()
@@ -25,7 +24,7 @@ namespace MiniURL.Application.IntegrationTests
             DateTimeService = dateTimeService.Object;
         }
 
-        public static async Task SeedDb(DbContextOptions<MiniURLDbContext> dbOptions, IDateTime dateTime)
+        protected static async Task SeedDb(DbContextOptions<MiniURLDbContext> dbOptions, IDateTime dateTime)
         {
             using (var ctx = new MiniURLDbContext(dbOptions, dateTime))
             {
@@ -42,7 +41,7 @@ namespace MiniURL.Application.IntegrationTests
             }
         }
 
-        public static async Task<int> CreateAUser(DbContextOptions<MiniURLDbContext> dbOptions, IDateTime dateTime)
+        protected static async Task<int> CreateAUser(DbContextOptions<MiniURLDbContext> dbOptions, IDateTime dateTime)
         {
             using (var ctx = new MiniURLDbContext(dbOptions, dateTime))
             {
