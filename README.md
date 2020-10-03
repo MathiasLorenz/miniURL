@@ -2,7 +2,7 @@
 
 My for-fun implementation of a URL shortening service through and API.
 
-Supports creation of shortened URLs by randomly generated identifiers and retrieving these (as a redirect) through the API. Only has a couple of hard coded users, as user administration has not been a priority yet.
+Supports creation of shortened URLs by either randomly generated identifiers or by a specified, desired short URL. And of course retrieving these (as a redirect) through the API. Only has a couple of hard coded users, as user administration has not been a priority yet.
 
 Things I want to do in the future (but no plans right now): User handling with IdentityServer4 and web front-end (Blazor?).
 
