@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
     <RootNamespace>MiniURL.Application.IntegrationTests</RootNamespace>
     <AssemblyName>MiniURL.Application.IntegrationTests</AssemblyName>
 
