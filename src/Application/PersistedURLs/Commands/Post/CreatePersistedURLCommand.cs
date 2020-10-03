@@ -12,6 +12,7 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
     {
         public int? UserId { get; set; } = null;
         public string URL { get; set; } = null!;
+        public string? DesiredShortURL { get; set; } = null;
     }
 
     public class CreatePersistedURLCommandHandler : IRequestHandler<CreatePersistedURLCommand, int>
@@ -39,7 +40,7 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
                 }
             }
 
-            var shortURL = await GenerateUniqueShortURL();
+            var shortURL = await GetShortURL(request?.DesiredShortURL);
 
             var persistedURL = new PersistedURL
             {
@@ -52,6 +53,26 @@ namespace MiniURL.Application.PersistedURLs.Commands.Post
             await _ctx.SaveChangesAsync(cancellationToken);
 
             return persistedURL.Id;
+        }
+
+        private async Task<string> GetShortURL(string? desiredShortURL)
+        {
+            if (desiredShortURL != null)
+            {
+                if (await _ctx.PersistedURLs.FirstOrDefaultAsync(x => x.ShortURL == desiredShortURL) != null)
+                {
+                    // You could check whether the found short URL matches the original too and just return this in that case...
+                    throw new BadRequestException("The requested short URL is already present in the database and cannot be chosen.");
+                }
+                else
+                {
+                    return desiredShortURL;
+                }
+            }
+            else
+            {
+                return await GenerateUniqueShortURL();
+            }
         }
 
         // This should probably be factored out and injected. I can mock the TokenGenerator,
