@@ -16,6 +16,7 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Queries
         [TestMethod]
         public async Task GetURLsForUser_InvalidUser_ThrowsException()
         {
+            ResetDatabase(DbOptions, DateTimeService);
             var userId = await CreateAUser(DbOptions, DateTimeService);
 
             using (var ctx = new MiniURLDbContext(DbOptions, DateTimeService))
@@ -31,6 +32,7 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Queries
         [TestMethod]
         public async Task GetURLsForUser_SeededDb_ReturnsCorrect()
         {
+            ResetDatabase(DbOptions, DateTimeService);
             await SeedDb(DbOptions, DateTimeService);
             var users = SeedData.Users();
             var persistedURLs = SeedData.PersistedURLs();

@@ -29,8 +29,6 @@ namespace MiniURL.Application.IntegrationTests
         {
             using (var ctx = new MiniURLDbContext(dbOptions, dateTime))
             {
-                ctx.Database.EnsureDeleted();
-
                 var seeder = new MiniURLDbContextSeeder(ctx);
 
                 try
@@ -48,8 +46,6 @@ namespace MiniURL.Application.IntegrationTests
         {
             using (var ctx = new MiniURLDbContext(dbOptions, dateTime))
             {
-                ctx.Database.EnsureDeleted();
-
                 var entity = SeedData.Users()[0];
                 ctx.Users.Add(entity);
                 await ctx.SaveChangesAsync();

@@ -17,6 +17,7 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
         [TestMethod]
         public async Task CreatePersistedURL_InvalidUserId_ThrowsException()
         {
+            ResetDatabase(DbOptions, DateTimeService);
             var mockedShortURL = "";
             var originalURL = "";
 
@@ -29,6 +30,7 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
         [TestMethod]
         public async Task CreatePersistedURL_NoUser()
         {
+            ResetDatabase(DbOptions, DateTimeService);
             var mockedShortURL = "xyz";
             var originalURL = "www.averyknownwebsite.com";
 
@@ -47,6 +49,7 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
         [TestMethod]
         public async Task CreatePersistedURL_WithUser()
         {
+            ResetDatabase(DbOptions, DateTimeService);
             var mockedShortURL = "abcdefgh";
             var originalURL = "www.somewebsite.com";
 
@@ -71,6 +74,7 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
         [TestMethod]
         public async Task CreatePersistedURL_WithDesiredURL_ReturnsCorrectly()
         {
+            ResetDatabase(DbOptions, DateTimeService);
             var mockedShortURL = "a";
             var desiredShortURL = "b";
             var originalURL = "www.someotherwebsite.com";
@@ -91,7 +95,6 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
         public async Task CreatePersistedURL_WithDesiredURLPutInTwice_ThrowsException()
         {
             ResetDatabase(DbOptions, DateTimeService);
-
             var mockedShortURL = "c";
             var desiredShortURL = "b";
             var originalURL = "www.someotherwebsite.com";
