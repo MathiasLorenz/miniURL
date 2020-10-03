@@ -57,5 +57,13 @@ namespace MiniURL.Application.IntegrationTests
                 return entity.Id;
             }
         }
+
+        protected static void ResetDatabase(DbContextOptions<MiniURLDbContext> dbOptions, IDateTime dateTime)
+        {
+            using (var ctx = new MiniURLDbContext(dbOptions, dateTime))
+            {
+                ctx.Database.EnsureDeleted();
+            }
+        }
     }
 }

@@ -68,17 +68,54 @@ namespace MiniURL.Application.IntegrationTests.PersistedURLs.Commands.Post
             }
         }
 
-        private async Task<int> SetupHandlerAndHandle(string shortURL, string originalURL, int? userId = null)
+        [TestMethod]
+        public async Task CreatePersistedURL_WithDesiredURL_ReturnsCorrectly()
+        {
+            var mockedShortURL = "a";
+            var desiredShortURL = "b";
+            var originalURL = "www.someotherwebsite.com";
+
+            var persistedURLId = await SetupHandlerAndHandle(mockedShortURL, originalURL, desiredShortURL: desiredShortURL);
+
+            using (var ctx = new MiniURLDbContext(DbOptions, DateTimeService))
+            {
+                var persistedURL = await ctx.PersistedURLs
+                    .SingleAsync(x => x.ShortURL == desiredShortURL);
+
+                persistedURL.Id.ShouldBe(persistedURLId);
+                persistedURL.ShortURL.ShouldBe(desiredShortURL);
+            }
+        }
+
+        [TestMethod]
+        public async Task CreatePersistedURL_WithDesiredURLPutInTwice_ThrowsException()
+        {
+            ResetDatabase(DbOptions, DateTimeService);
+
+            var mockedShortURL = "c";
+            var desiredShortURL = "b";
+            var originalURL = "www.someotherwebsite.com";
+
+            var persistedURLId = await SetupHandlerAndHandle(mockedShortURL, originalURL, desiredShortURL: desiredShortURL);
+            await Should.ThrowAsync<BadRequestException>(
+                SetupHandlerAndHandle(mockedShortURL, originalURL, desiredShortURL: desiredShortURL));
+        }
+
+        private async Task<int> SetupHandlerAndHandle(string mockedShortURL,
+                                                      string originalURL,
+                                                      int? userId = null,
+                                                      string? desiredShortURL = null)
         {
             var mockTokenGenerator = new Mock<ITokenGenerator>();
-            mockTokenGenerator.Setup(x => x.GetUniqueKey()).Returns(shortURL);
+            mockTokenGenerator.Setup(x => x.GetUniqueKey()).Returns(mockedShortURL);
 
             using (var ctx = new MiniURLDbContext(DbOptions, DateTimeService))
             {
                 var request = new CreatePersistedURLCommand
                 {
                     URL = originalURL,
-                    UserId = userId ?? null
+                    UserId = userId ?? null,
+                    DesiredShortURL = desiredShortURL ?? null
                 };
                 var handler = new CreatePersistedURLCommandHandler(ctx, mockTokenGenerator.Object);
 
